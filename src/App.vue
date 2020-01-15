@@ -43,13 +43,11 @@ import Vue from 'vue'
 <style lang="scss">
   @import "assets/Reset";
   #search-form {
-    border: 1px solid red;
     margin-top: 16%;
   }
   #site-list {
-    border: 1px solid red;
+    margin-top: 20px;
   }
   #add-form{
-    border: 1px solid black;
   }
 </style>
