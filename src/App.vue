@@ -10,7 +10,8 @@
   import SearchForm from "./components/SearchForm"
   import SiteList from "./components/SiteList"
   import AddForm from "./components/AddForm"
-import Vue from 'vue'
+  import Vue from 'vue'
+
   export default {
     name: 'App',
     components: {
@@ -30,10 +31,10 @@ import Vue from 'vue'
       }
     },
     mounted() {
-      this.eventBus.$on('openAddForm', ()=>{
+      this.eventBus.$on('openAddForm', () => {
         this.showAddForm = true
       })
-      this.eventBus.$on('closeAddForm',()=>{
+      this.eventBus.$on('closeAddForm', () => {
         this.showAddForm = false
       })
     }
@@ -48,6 +49,6 @@ import Vue from 'vue'
   #site-list {
     margin-top: 20px;
   }
-  #add-form{
+  #add-form {
   }
 </style>

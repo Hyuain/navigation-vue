@@ -35,6 +35,12 @@
 
 <script>
   import '../assets/icon'
+  import Vue from 'vue'
+  import LongPress from '../plugins/longpress'
+
+  Vue.use(LongPress, {
+    time: 1000
+  })
 
   export default {
     name: "SiteList",
@@ -58,50 +64,6 @@
         mobileDeleteShow: false
       }
     },
-    directives: {
-      longpress: {
-        bind: function (el, binding) {
-          let pressTimer = null
-          let longPress = false
-          const start = (e) => {
-            e.preventDefault()
-            if (e.type === 'click') {
-              return
-            }
-            if (pressTimer === null) {
-              pressTimer = setTimeout(() => {
-                handler(e)
-                longPress = true
-              }, 1000)
-            }
-          }
-          const cancel = () => {
-            if (pressTimer !== null) {
-              clearTimeout(pressTimer)
-              pressTimer = null
-            }
-          }
-          const handler = (e) => {
-            binding.value(e, el)
-          }
-          const bindEvents = (el) => {
-            el.addEventListener('touchstart', start)
-            el.addEventListener('touchend', (e) => {
-              cancel(e)
-              if (longPress === false) {
-                el.click()
-              }
-            })
-            document.addEventListener('click', () => {
-              el.nextSibling.classList.add('mobile-delete-hide')
-              el.nextSibling.classList.remove('mobile-delete-show')
-            })
-            el.addEventListener('touchcancel', cancel)
-          }
-          bindEvents(el)
-        }
-      }
-    },
     methods: {
 
       deleteSite(site) {
@@ -112,6 +74,10 @@
         this.vibration(20)
         el.nextSibling.classList.remove('mobile-delete-hide')
         el.nextSibling.classList.add('mobile-delete-show')
+        document.addEventListener('click', () => {
+          el.nextSibling.classList.add('mobile-delete-hide')
+          el.nextSibling.classList.remove('mobile-delete-show')
+        })
       },
       vibration(duration) {
         window.navigator.vibrate = window.navigator.vibrate
