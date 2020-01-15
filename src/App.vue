@@ -1,28 +1,55 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <SearchForm id="search-form"></SearchForm>
+    <SiteList id="site-list"></SiteList>
+    <AddForm id="add-form" v-if="showAddForm"></AddForm>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  import SearchForm from "./components/SearchForm"
+  import SiteList from "./components/SiteList"
+  import AddForm from "./components/AddForm"
+import Vue from 'vue'
+  export default {
+    name: 'App',
+    components: {
+      SearchForm,
+      SiteList,
+      AddForm
+    },
+    data() {
+      return {
+        eventBus: new Vue({}),
+        showAddForm: false
+      }
+    },
+    provide() {
+      return {
+        eventBus: this.eventBus
+      }
+    },
+    mounted() {
+      this.eventBus.$on('openAddForm', ()=>{
+        this.showAddForm = true
+      })
+      this.eventBus.$on('closeAddForm',()=>{
+        this.showAddForm = false
+      })
+    }
   }
-}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import "assets/Reset";
+  #search-form {
+    border: 1px solid red;
+    margin-top: 16%;
+  }
+  #site-list {
+    border: 1px solid red;
+  }
+  #add-form{
+    border: 1px solid black;
+  }
 </style>
