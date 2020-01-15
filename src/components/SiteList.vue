@@ -65,19 +65,17 @@
       }
     },
     methods: {
-
-      deleteSite(site) {
-        this.sites.splice(this.sites.indexOf(site), 1)
-        localStorage.setItem('sites', JSON.stringify(this.sites))
-      },
       showMobileDelete(e, el) {
         this.vibration(20)
         el.nextSibling.classList.remove('mobile-delete-hide')
         el.nextSibling.classList.add('mobile-delete-show')
         document.addEventListener('click', () => {
-          el.nextSibling.classList.add('mobile-delete-hide')
-          el.nextSibling.classList.remove('mobile-delete-show')
+          this.hideMobileDelete(el)
         })
+      },
+      hideMobileDelete(el) {
+        el.nextSibling.classList.add('mobile-delete-hide')
+        el.nextSibling.classList.remove('mobile-delete-show')
       },
       vibration(duration) {
         window.navigator.vibrate = window.navigator.vibrate
@@ -92,6 +90,13 @@
       addSite() {
         this.eventBus.$emit('openAddForm')
       },
+      deleteSite(site) {
+        this.sites.splice(this.sites.indexOf(site), 1)
+        localStorage.setItem('sites', JSON.stringify(this.sites))
+      },
+      openSite(site) {
+        window.open(site.url, '_self')
+      },
       test() {
         localStorage.clear()
         location.reload()
@@ -100,9 +105,6 @@
         event.target.classList.add('ico-error')
         event.target.nextSibling.classList.remove('ico-success')
         event.target.nextSibling.classList.add('ico-error')
-      },
-      openSite(site) {
-        window.open(site.url, '_self')
       }
     },
     created() {
