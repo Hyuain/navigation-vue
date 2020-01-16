@@ -43,11 +43,15 @@
 
 <style lang="scss">
   @import "assets/Reset";
+  html,body,#app{
+    height: 100%;
+  }
   #search-form {
     margin-top: 16%;
   }
   #site-list {
-    margin-top: 20px;
+    margin-top: 40px;
+    outline: 1px solid red;
   }
   #add-form {
   }
