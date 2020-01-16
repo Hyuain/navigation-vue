@@ -12,6 +12,7 @@ export default {
           if (e.type === 'click' && e.button !== 0) {
             return
           }
+          console.log('start')
           if (pressTimer === null) {
             pressTimer = setTimeout(() => {
               handler(e)
@@ -37,7 +38,7 @@ export default {
             }
             cancel(e)
           })
-          el.addEventListener('touchcancel', cancel)
+          el.addEventListener('touchcancel',cancel)
         }
         bindEvents(el)
       }
@@ -49,7 +50,9 @@ const checkBinding = (el, binding, vNode) => {
   if (typeof binding.value !== 'function') {
     const compName = vNode.context.name
     let warn = `[longpress:] provided expression '${binding.expression}' is not a function, but has to be `;
-    if (compName) { warn += `Found in component '${compName}' `}
+    if (compName) {
+      warn += `Found in component '${compName}' `
+    }
     console.warn(warn);
   }
 }

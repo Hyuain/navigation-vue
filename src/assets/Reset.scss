@@ -1,9 +1,23 @@
 *{padding: 0; margin: 0; box-sizing: border-box}
 *::before{padding: 0; margin: 0;  box-sizing: border-box}
 
+* {
+  -webkit-tap-highlight-color:transparent;
+}
+
 .icon {
   width: 1em; height: 1em;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+
+button {
+  &:active,&:focus{
+    outline: none;
+  }
+}
+
+img {
+  max-width: 100%;
 }

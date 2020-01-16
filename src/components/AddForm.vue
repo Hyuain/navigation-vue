@@ -66,7 +66,7 @@
 <style lang="scss" scoped>
   #add-form {
     position: fixed;
-    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 2;
     height: 100vh;
     width: 100vw;
     left: 0;

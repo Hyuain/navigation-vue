@@ -1,7 +1,29 @@
 <template>
   <div id="search-form">
-    <form action="https://www.baidu.com/s" method="get">
-      <input type="search" v-model="searchContent">
+    <div class="logo">
+      <transition name="slide-fade">
+        <img class="google" src="../../static/images/google-white.png" alt="google-logo" v-if="searchEngine === 'google'">
+      </transition>
+      <transition name="slide-fade">
+        <img class="baidu" src="../../static/images/baidu-white.png" alt="baidu-logo" v-if="searchEngine === 'baidu'">
+      </transition>
+      <transition name="slide-fade">
+        <img class="bing" src="../../static/images/bing-white.png" alt="bing-logo" v-if="searchEngine === 'bing'">
+      </transition>
+    </div>
+    <form :action="requestUrl[this.searchEngine].path" method="get">
+      <div class="search-engine">
+        <svg class="icon google active" @click="x($event,'google')">
+          <use xlink:href="#icon-google"></use>
+        </svg>
+        <svg class="icon baidu" @click="x($event,'baidu')">
+          <use xlink:href="#icon-baidu"></use>
+        </svg>
+        <svg class="icon bing" @click="x($event,'bing')">
+          <use xlink:href="#icon-bing"></use>
+        </svg>
+      </div>
+      <input type="search" v-model="searchContent" placeholder="想要找些什么呢？" :name="requestUrl[this.searchEngine].query" >
       <button type="submit">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-search"></use>
@@ -13,49 +35,164 @@
 
 <script>
   import '../assets/icon'
+
   export default {
     name: "SearchForm",
-    data(){
-      return{
-        searchContent: ''
+    data() {
+      return {
+        searchContent: '',
+        searchEngine: 'google',
+        timer: null,
+        requestUrl: {
+          google:{
+            path: 'https://www.google.com/search',
+            query: 'q'
+          },
+          baidu:{
+            path: 'https://www.baidu.com/s',
+            query: 'wd'
+          },
+          bing:{
+            path: 'https://cn.bing.com/search',
+            query: 'q'
+          },
+          '':{
+            path:'',
+            query:''
+          }
+        }
+      }
+    },
+    methods: {
+      x(e, value) {
+        clearTimeout(this.timer)
+        this.searchEngine = ''
+        e.currentTarget.parentNode.childNodes.forEach((el) => {
+          el.classList.remove('active')
+        })
+        e.currentTarget.classList.add('active')
+        this.timer = setTimeout(() => {
+          this.searchEngine = value
+        }, 400)
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  #search-form{
-    form{
-      display: flex;
-      max-width: 80%;
+  #search-form {
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    @media(min-width: 576px) {
+      max-width: 560px;
+    }
+    .logo {
+      width: 100%;
+      position: relative;
+      .slide-fade-enter-active {
+        transition: all .3s ease;
+      }
+      .slide-fade-leave-active {
+        transition: all .3s ease;
+      }
+      .slide-fade-enter, .slide-fade-leave-to {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+      img {
+        &.google {
+          position: absolute;
+          top: -102px;
+          height: 100px;
+          @media (max-width: 576px) {
+            height: 80px;
+            top: -82px;
+          }
+        }
+        &.baidu {
+          position: absolute;
+          top: -106px;
+          left: 4px;
+          height: 100px;
+          @media (max-width: 576px) {
+            height: 80px;
+            top: -84px;
+          }
+        }
+        &.bing {
+          position: absolute;
+          top: -102px;
+          left: 4px;
+          height: 100px;
+          @media (max-width: 576px) {
+            height: 80px;
+            top: -82px;
+          }
+        }
+      }
+    }
+    form {
       margin-left: auto;
       margin-right: auto;
+      display: flex;
       padding: 0 10px;
-      border-radius: 20px;
+      border-radius: 26px;
       background: white;
-      box-shadow: 0 1px 3px #bbb;
-      @media(min-width: 576px) {
-        max-width: 500px;
+      box-shadow: 0 1px 2px #aaa;
+      align-items: center;
+      .search-engine {
+        flex-shrink: 0;
+        .icon {
+          font-size: 24px;
+          margin-right: 3px;
+          position: relative;
+          z-index: 1;
+          transition: all .2s;
+          color: #777;
+          &.baidu{
+            font-size: 25px;
+          }
+          &:hover{
+            transform: translateY(-2px);
+            cursor: pointer;
+          }
+          &.active,&:hover {
+            &.google {
+              color: #e63f2d;
+            }
+            &.baidu {
+              color: #233fe4;
+            }
+            &.bing {
+              color: #fdb600
+            }
+          }
+        }
       }
-      input{
+      input {
         flex-grow: 1;
-        height: 40px;
-        margin-left: 10px;
+        min-width: 0;
+        height: 48px;
+        margin-left: 5px;
         margin-right: 10px;
-        border: none;
         background: none;
-        font-size: 16px;
-        &:focus{
+        font-size: 18px;
+        border: none;
+        position: relative;
+        z-index: 1;
+        &:focus {
           outline: none;
         }
       }
-      button{
+      button {
         flex-shrink: 0;
         border: none;
         background: none;
         padding-right: 7px;
         color: #1d78eb;
-        font-size: 20px;
+        font-size: 24px;
       }
     }
   }

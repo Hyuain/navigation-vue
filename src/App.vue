@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div id="app">
     <SearchForm id="search-form"></SearchForm>
     <SiteList id="site-list"></SiteList>
-    <AddForm id="add-form" v-if="showAddForm"></AddForm>
+    <transition name="bounce">
+      <AddForm id="add-form" v-if="showAddForm"></AddForm>
+    </transition>
   </div>
 </template>
 
@@ -22,7 +24,7 @@
     data() {
       return {
         eventBus: new Vue({
-          data(){
+          data() {
             return {
               addFormOpen: false
             }
@@ -51,16 +53,43 @@
 
 <style lang="scss">
   @import "assets/Reset";
-  html,body,#app{
-    height: 100%;
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
-  #search-form {
-    margin-top: 16%;
+  .bounce-enter-active {
+    animation: bounce-in .5s;
   }
-  #site-list {
-    margin-top: 40px;
-    outline: 1px solid red;
+  .bounce-leave-active {
+    animation: bounce-in .5s reverse;
   }
-  #add-form {
+  html, body {
+    height: 100vh;
   }
+  body {
+    overflow: hidden;
+    background-image: url("../static/images/wallpaper-1.png");
+    background-repeat: no-repeat;
+  }
+  #app {
+    #search-form {
+      margin-top: 150px;
+      @media (min-width: 993px) {
+        margin-top: 200px;
+      }
+    }
+    #site-list {
+      margin-top: 40px;
+    }
+    #add-form {
+    }
+  }
+
 </style>

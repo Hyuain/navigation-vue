@@ -105,7 +105,6 @@
           || window.navigator.webkitVibrate
           || window.navigator.mozVibrate
           || window.navigator.msVibrate
-          || null
         if (window.navigator.vibrate) {
           window.navigator.vibrate(duration)
         }
@@ -148,8 +147,8 @@
     100% {width: 142%;height: 142%;}
   }
   @keyframes mobile-delete-inner-show {
-    0% {width: 0;height: 0;}
-    100% {width: 50px;height: 50px;}
+    0% {width: 0;height: 0;font-size: 0;}
+    100% {width: 50px;height: 50px;font-size: 30px;}
   }
   #site-list {
     margin-left: auto;
@@ -299,7 +298,6 @@
                 top: 50%;
                 left: 50%;
                 transform: translateX(-50%) translateY(-50%);
-                font-size: 30px;
                 color: rgba(255, 255, 255, 0.9);
               }
             }
