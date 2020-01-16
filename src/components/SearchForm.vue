@@ -27,13 +27,16 @@
   #search-form{
     form{
       display: flex;
-      max-width: 500px;
+      max-width: 80%;
       margin-left: auto;
       margin-right: auto;
       padding: 0 10px;
       border-radius: 20px;
       background: white;
       box-shadow: 0 1px 3px #bbb;
+      @media(min-width: 576px) {
+        max-width: 500px;
+      }
       input{
         flex-grow: 1;
         height: 40px;

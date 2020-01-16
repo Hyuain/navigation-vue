@@ -36,7 +36,6 @@
         console.log('openAddForm')
       })
     },
-
     methods: {
       addSite() {
         if (!this.name) {
@@ -52,6 +51,7 @@
         }
         this.textIco = this.name[0].toUpperCase()
         this.eventBus.$emit('addSite', {name: this.name, site: this.url, ico: this.ico, textIco: this.textIco})
+        this.eventBus.$emit('closeAddForm')
       },
       simplifyUrl(url) {
         return url.replace('https://', '')

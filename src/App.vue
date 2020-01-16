@@ -21,7 +21,13 @@
     },
     data() {
       return {
-        eventBus: new Vue({}),
+        eventBus: new Vue({
+          data(){
+            return {
+              addFormOpen: false
+            }
+          }
+        }),
         showAddForm: false
       }
     },
@@ -33,9 +39,11 @@
     mounted() {
       this.eventBus.$on('openAddForm', () => {
         this.showAddForm = true
+        this.eventBus.addFormOpen = true
       })
       this.eventBus.$on('closeAddForm', () => {
         this.showAddForm = false
+        this.eventBus.addFormOpen = false
       })
     }
   }

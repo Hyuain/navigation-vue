@@ -12,10 +12,12 @@
           </div>
         </div>
         <div class="mobile-delete-hide">
-          <div class="mobile-delete-inner" @click="deleteSite(site)">
-            <svg class="icon">
-              <use xlink:href="#icon-close"></use>
-            </svg>
+          <div class="mobile-delete-bg">
+            <div class="mobile-delete-inner" @click="deleteSite(site)">
+              <svg class="icon">
+                <use xlink:href="#icon-close"></use>
+              </svg>
+            </div>
           </div>
         </div>
         <div class="pc-delete" @click="deleteSite(site)">
@@ -25,8 +27,8 @@
         </div>
 
       </div>
-      <div class="site add-button" @click="addSite">
-        <svg class="icon" aria-hidden="true">
+      <div class="site add-button" @click="addSite" :class="{'active': eventBus.addFormOpen}">
+        <svg class="icon" aria-hidden="true" :class="{'active': eventBus.addFormOpen}">
           <use xlink:href="#icon-add"></use>
         </svg>
       </div>
@@ -79,9 +81,10 @@
             url: 'https://www.bilibili.com/',
             ico: 'https://www.bilibili.com/favicon.ico',
             textIco: 'B'
-          }
+          },
         ],
-        mobileDeleteShow: false
+        mobileDeleteShow: false,
+
       }
     },
     methods: {
@@ -140,6 +143,14 @@
 </script>
 
 <style lang="scss" scoped>
+  @keyframes mobile-delete-bg-show {
+    0% {width: 0;height: 0;}
+    100% {width: 142%;height: 142%;}
+  }
+  @keyframes mobile-delete-inner-show {
+    0% {width: 0;height: 0;}
+    100% {width: 50px;height: 50px;}
+  }
   #site-list {
     margin-left: auto;
     margin-right: auto;
@@ -150,18 +161,33 @@
     @media(min-width: 993px) {
       max-width: 940px;
     }
-    .site-list-inner{
+    .site-list-inner {
       display: flex;
       flex-wrap: wrap;
-      margin-right: -20px;
+      justify-content: space-evenly;
+      @media(min-width: 576px) {
+        margin-right: -20px;
+        justify-content: flex-start;
+      }
       .site {
         width: 100px;
         height: 100px;
-        margin-right: 20px;
+        margin-left: 7px;margin-right: 7px;margin-bottom: 20px;
         background-color: white;
         border-radius: 50%;
         box-shadow: 0 1px 1px #b9daff;
         position: relative;
+        @media(min-width: 576px) {
+          margin-left: 0;
+          margin-right: 20px;
+        }
+        &:hover {
+          box-shadow: 0 1px 5px #b9daff;
+          color: #1d78eb;
+          .pc-delete {
+            opacity: 1;
+          }
+        }
         .content {
           width: 100%;
           height: 100%;
@@ -180,7 +206,7 @@
             align-items: center;
             text-transform: uppercase;
             font-size: 40px;
-            border-radius: 40%;
+            border-radius: 30%;
             overflow: hidden;
             img {
               width: 120%;
@@ -241,38 +267,41 @@
             }
           }
         }
-        &:hover {
-          .pc-delete {
-            opacity: 1;
-          }
-        }
         .mobile-delete-hide {
           display: none;
         }
         .mobile-delete-show {
-          background-color: rgba(200, 200, 200, 0.8);
           width: calc(100% + 2px);
           height: calc(100% + 2px);
           position: absolute;
           top: -1px;
           left: -1px;
           border-radius: 4px;
-          .mobile-delete-inner {
-            background-color: rgba(150, 150, 150, 0.95);
-            width: 50px;
-            height: 50px;
+          overflow: hidden;
+          .mobile-delete-bg {
+            background-color: rgba(200, 200, 200, 0.8);
+            animation: mobile-delete-bg-show .3s forwards;
+            border-radius: 50%;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translateX(-50%) translateY(-50%);
-            border-radius: 50%;
-            .icon {
+            .mobile-delete-inner {
+              animation: mobile-delete-inner-show .4s forwards;
+              background-color: rgba(150, 150, 150, 0.95);
               position: absolute;
               top: 50%;
               left: 50%;
               transform: translateX(-50%) translateY(-50%);
-              font-size: 30px;
-              color: rgba(255, 255, 255, 0.9);
+              border-radius: 50%;
+              .icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                font-size: 30px;
+                color: rgba(255, 255, 255, 0.9);
+              }
             }
           }
         }
@@ -283,7 +312,19 @@
           align-items: center;
           padding: 10px 0 10px;
           position: relative;
+          transition: all .3s;
           cursor: pointer;
+          box-shadow: 0 1px 5px #b9daff;
+          &:hover, &.active {
+            background-color: #1d78eb;
+            box-shadow: 0 1px 5px #b9daff;
+            cursor: pointer;
+            .icon {
+              color: white;
+              transform: rotateZ(90deg);
+              transition: all .3s;
+            }
+          }
           .icon {
             width: 50px;
             height: 50px;
@@ -293,6 +334,5 @@
         }
       }
     }
-
   }
 </style>
