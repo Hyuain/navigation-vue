@@ -9,6 +9,7 @@ export default {
         let longPress = false
         const start = (e) => {
           e.preventDefault()
+
           if (e.type === 'click' && e.button !== 0) {
             return
           }
@@ -33,12 +34,13 @@ export default {
         const bindEvents = (el) => {
           el.addEventListener('touchstart', start)
           el.addEventListener('touchend', (e) => {
-            if (longPress === false) {
+            if (pressTimer !== null && longPress === false) {
               el.click()
             }
             cancel(e)
           })
           el.addEventListener('touchcancel',cancel)
+          el.addEventListener('touchmove',cancel)
         }
         bindEvents(el)
       }

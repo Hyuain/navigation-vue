@@ -74,7 +74,6 @@
     height: 100vh;
   }
   body {
-    overflow: hidden;
     background-image: url("../static/images/wallpaper-1.png");
     background-repeat: no-repeat;
   }

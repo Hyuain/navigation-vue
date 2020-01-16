@@ -32,7 +32,6 @@
           <use xlink:href="#icon-add"></use>
         </svg>
       </div>
-      <button @click="test">清空localstorage</button>
     </div>
   </div>
 </template>
@@ -119,10 +118,6 @@
       openSite(site) {
         window.open(site.url, '_self')
       },
-      test() {
-        localStorage.clear()
-        location.reload()
-      },
       handelIcoError(event) {
         event.target.classList.add('ico-error')
         event.target.nextSibling.classList.remove('ico-success')
@@ -176,12 +171,13 @@
         border-radius: 50%;
         box-shadow: 0 1px 1px #b9daff;
         position: relative;
+        transition: all .2s;
         @media(min-width: 576px) {
           margin-left: 0;
           margin-right: 20px;
         }
-        &:hover {
-          box-shadow: 0 1px 5px #b9daff;
+        &:hover, &:active {
+          box-shadow: 0 1px 3px #b9daff;
           color: #1d78eb;
           .pc-delete {
             opacity: 1;
@@ -208,8 +204,8 @@
             border-radius: 30%;
             overflow: hidden;
             img {
-              width: 120%;
-              height: 120%;
+              width: 100%;
+              height: 100%;
               &.ico-error {
                 display: none;
               }
@@ -312,10 +308,10 @@
           position: relative;
           transition: all .3s;
           cursor: pointer;
-          box-shadow: 0 1px 5px #b9daff;
+          box-shadow: 0 1px 1px #b9daff;
           &:hover, &.active {
             background-color: #1d78eb;
-            box-shadow: 0 1px 5px #b9daff;
+            box-shadow: 0 1px 3px #b9daff;
             cursor: pointer;
             .icon {
               color: white;
