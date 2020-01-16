@@ -23,6 +23,7 @@ export default {
           if (pressTimer !== null) {
             clearTimeout(pressTimer)
             pressTimer = null
+            longPress = false
           }
         }
         const handler = (e) => {
@@ -31,10 +32,10 @@ export default {
         const bindEvents = (el) => {
           el.addEventListener('touchstart', start)
           el.addEventListener('touchend', (e) => {
-            cancel(e)
             if (longPress === false) {
               el.click()
             }
+            cancel(e)
           })
           el.addEventListener('touchcancel', cancel)
         }

@@ -276,10 +276,10 @@
           position: absolute;
           top: -1px;
           left: -1px;
-          border-radius: 4px;
+          border-radius: 16px;
           overflow: hidden;
           .mobile-delete-bg {
-            background-color: rgba(200, 200, 200, 0.8);
+            background-color: rgba(225, 225, 225, 0.8);
             animation: mobile-delete-bg-show .3s forwards;
             border-radius: 50%;
             position: absolute;
@@ -288,7 +288,7 @@
             transform: translateX(-50%) translateY(-50%);
             .mobile-delete-inner {
               animation: mobile-delete-inner-show .4s forwards;
-              background-color: rgba(150, 150, 150, 0.95);
+              background-color: rgba(255, 62, 63, 0.7);
               position: absolute;
               top: 50%;
               left: 50%;
