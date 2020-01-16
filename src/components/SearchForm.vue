@@ -13,13 +13,13 @@
     </div>
     <form :action="requestUrl[this.searchEngine].path" method="get">
       <div class="search-engine">
-        <svg class="icon google active" @click="x($event,'google')">
+        <svg class="icon google active" @click="changeSearchEngine($event,'google')">
           <use xlink:href="#icon-google"></use>
         </svg>
-        <svg class="icon baidu" @click="x($event,'baidu')">
+        <svg class="icon baidu" @click="changeSearchEngine($event,'baidu')">
           <use xlink:href="#icon-baidu"></use>
         </svg>
-        <svg class="icon bing" @click="x($event,'bing')">
+        <svg class="icon bing" @click="changeSearchEngine($event,'bing')">
           <use xlink:href="#icon-bing"></use>
         </svg>
       </div>
@@ -64,7 +64,7 @@
       }
     },
     methods: {
-      x(e, value) {
+      changeSearchEngine(e, value) {
         clearTimeout(this.timer)
         this.searchEngine = ''
         e.currentTarget.parentNode.childNodes.forEach((el) => {

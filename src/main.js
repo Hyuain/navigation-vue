@@ -3,7 +3,7 @@ import App from './App.vue'
 import LongPress from './plugins/longpress'
 
 Vue.use(LongPress, {
-  time: 1000
+  time: 350
 })
 
 Vue.config.productionTip = false
