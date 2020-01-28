@@ -3,7 +3,7 @@
     <div class="site-list-inner">
       <div class="site" v-for="site in sites" :key="site.url">
         <div class="content" v-longpress="showMobileDelete" @click="openSite(site)">
-          <div class="ico">
+          <div class="ico" @click="(e)=>{e.preventDefault()}">
             <img :src="site.ico" alt="ico" @error="handelIcoError($event)">
             <span class="ico-success">{{site.textIco}}</span>
           </div>
@@ -159,8 +159,11 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-evenly;
+      margin-left: 10px;
+      margin-right: 10px;
       @media(min-width: 576px) {
         margin-right: -20px;
+        margin-left: 0;
         justify-content: flex-start;
       }
       .site {

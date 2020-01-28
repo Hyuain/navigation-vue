@@ -72,6 +72,7 @@
   }
   html, body {
     height: 100vh;
+    overflow: hidden;
   }
   body {
     background-image: url("../static/images/wallpaper-1.png");
@@ -81,11 +82,11 @@
     #search-form {
       margin-top: 150px;
       @media (min-width: 993px) {
-        margin-top: 200px;
+        margin-top: 40vh;
       }
     }
     #site-list {
-      margin-top: 40px;
+      margin-top: 50px;
     }
     #add-form {
     }

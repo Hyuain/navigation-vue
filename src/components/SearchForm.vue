@@ -81,7 +81,7 @@
 
 <style lang="scss" scoped>
   #search-form {
-    max-width: 95%;
+    max-width: 90%;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -104,31 +104,41 @@
       img {
         &.google {
           position: absolute;
-          top: -102px;
-          height: 100px;
-          @media (max-width: 576px) {
-            height: 80px;
-            top: -82px;
+          width: 240px;
+          top: -82px;
+          left: 50%;
+          margin-left: -124px;
+          @media (min-width: 576px) {
+            width: 300px;
+            top: -102px;
+            left: 0;
+            margin-left: 0;
           }
         }
         &.baidu {
           position: absolute;
-          top: -106px;
-          left: 4px;
-          height: 100px;
-          @media (max-width: 576px) {
-            height: 80px;
-            top: -84px;
+          width: 250px;
+          top: -84px;
+          left: 50%;
+          margin-left: -124px;
+          @media (min-width: 576px) {
+            width: 312px;
+            top: -106px;
+            left: 4px;
+            margin-left: 0;
           }
         }
         &.bing {
           position: absolute;
-          top: -102px;
-          left: 4px;
-          height: 100px;
-          @media (max-width: 576px) {
-            height: 80px;
-            top: -82px;
+          width: 206px;
+          top: -82px;
+          left: 50%;
+          margin-left: -110px;
+          @media (min-width: 576px) {
+            width: 258px;
+            top: -102px;
+            left: 4px;
+            margin-left: 0;
           }
         }
       }
