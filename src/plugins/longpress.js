@@ -9,11 +9,9 @@ export default {
         let longPress = false
         const start = (e) => {
           e.preventDefault()
-
-          if (e.type === 'click' && e.button !== 0) {
+          if (e.type === 'click') {
             return
           }
-          console.log('start')
           if (pressTimer === null) {
             pressTimer = setTimeout(() => {
               handler(e)

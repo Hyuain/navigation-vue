@@ -12,7 +12,7 @@
       </div>
       <div class="buttons">
         <button class="add" @click="addSite">添加</button>
-        <button class="cancel" @click="eventBus.$emit('closeAddForm')">取消</button>
+        <button class="cancel" @click="eventBus.addFormOpen = false">取消</button>
       </div>
     </div>
 
@@ -31,11 +31,6 @@
         textIco: ''
       }
     },
-    created() {
-      this.eventBus.$on('openAddForm', () => {
-        console.log('openAddForm')
-      })
-    },
     methods: {
       addSite() {
         if (!this.name) {
@@ -51,7 +46,7 @@
         }
         this.textIco = this.name[0].toUpperCase()
         this.eventBus.$emit('addSite', {name: this.name, site: this.url, ico: this.ico, textIco: this.textIco})
-        this.eventBus.$emit('closeAddForm')
+        this.eventBus.addFormOpen = false
       },
       simplifyUrl(url) {
         return url.replace('https://', '')

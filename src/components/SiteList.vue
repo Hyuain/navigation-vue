@@ -2,6 +2,7 @@
   <div id="site-list">
     <div class="site-list-inner">
       <div class="site" v-for="site in sites" :key="site.url">
+
         <div class="content" v-longpress="showMobileDelete" @click="openSite(site)">
           <div class="ico" @click="(e)=>{e.preventDefault()}">
             <img :src="site.ico" alt="ico" @error="handelIcoError($event)">
@@ -11,6 +12,7 @@
             {{site.name}}
           </div>
         </div>
+
         <div class="mobile-delete-hide">
           <div class="mobile-delete-bg">
             <div class="mobile-delete-inner" @click="deleteSite(site)">
@@ -20,18 +22,20 @@
             </div>
           </div>
         </div>
+
         <div class="pc-delete" @click="deleteSite(site)">
           <svg class="icon">
             <use xlink:href="#icon-close"></use>
           </svg>
         </div>
-
       </div>
+
       <div class="site add-button" @click="addSite" :class="{'active': eventBus.addFormOpen}">
         <svg class="icon" aria-hidden="true" :class="{'active': eventBus.addFormOpen}">
           <use xlink:href="#icon-add"></use>
         </svg>
       </div>
+
     </div>
   </div>
 </template>
@@ -109,7 +113,7 @@
         }
       },
       addSite() {
-        this.eventBus.$emit('openAddForm')
+        this.eventBus.addFormOpen = true
       },
       deleteSite(site) {
         this.sites.splice(this.sites.indexOf(site), 1)

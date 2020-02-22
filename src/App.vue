@@ -3,7 +3,7 @@
     <SearchForm id="search-form"></SearchForm>
     <SiteList id="site-list"></SiteList>
     <transition name="bounce">
-      <AddForm id="add-form" v-if="showAddForm"></AddForm>
+      <AddForm id="add-form" v-if="eventBus.addFormOpen"></AddForm>
     </transition>
   </div>
 </template>
@@ -29,24 +29,13 @@
               addFormOpen: false
             }
           }
-        }),
-        showAddForm: false
+        })
       }
     },
     provide() {
       return {
         eventBus: this.eventBus
       }
-    },
-    mounted() {
-      this.eventBus.$on('openAddForm', () => {
-        this.showAddForm = true
-        this.eventBus.addFormOpen = true
-      })
-      this.eventBus.$on('closeAddForm', () => {
-        this.showAddForm = false
-        this.eventBus.addFormOpen = false
-      })
     }
   }
 </script>
